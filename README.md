@@ -2,6 +2,8 @@
 
 A backend API for reserving a limited number of spots at an event, built around one core problem: making sure two people can never both successfully grab the last spot at the same time. This is my first project using PostgreSQL instead of MongoDB, and my first time working with real database transactions.
 
+**Live API:** https://booking-api-qzok.onrender.com/
+
 ## The Core Problem
 
 If you check "are there spots available" and then separately reduce the spot count, there's a gap between those two steps where two requests could both see availability and both succeed, even if only one spot was actually left. This is a race condition, and it's the main thing this project is built to prevent.
@@ -102,5 +104,3 @@ For protected routes, include the token in the request header:
 - Idempotency keys so a retried request can't create a duplicate booking
 - Automated tests, including repeatable concurrency tests
 - An outbox pattern so expiry jobs can recover safely if the queue is temporarily unavailable
-- API documentation with OpenAPI/Swagger
-- Deploy the API
